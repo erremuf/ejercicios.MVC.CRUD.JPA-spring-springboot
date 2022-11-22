@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<link href=" https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css " rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<title>Listado facturas</title>
+</head>
+<body>
+
+	<div class="container mt-5">	
+		<div class="mx-auto" style="width: 100%;">
+		
+			<h2 th:text="${titulo}" class="pt-5 pb-5"></h2>
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">NIF</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Apellidos</th>
+						<th scope="col">Total</th>
+						<th scope="col">Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="factura : ${lista}">
+						<th scope="row" th:text="${factura.idFactura}"></th>
+						<td th:text="${factura.nifCliente}"></td>
+						<td th:text="${factura.nombre}"></td>
+						<td th:text="${factura.apellidos}"></td>
+						<td th:text="${factura.valor} + ' €'"></td>
+						<td>
+							<a th:href="@{/editar/} + ${factura.idFactura}" class="btn btn-success" role="button">Editar</a>
+							<a th:href="@{/eliminar/} + ${factura.idFactura}" class="btn btn-danger" role="button">Eliminar</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="row">
+				<div class="col-md-3">
+					<a name="registrarFactura" type="submit" value="registrarFactura" class="btn btn-primary mt-3 mb-5" th:href="@{/nuevaFactura}">Registrar nueva factura</a>
+				</div>
+				<div class="col-md-3 float-right">
+					<a name="inicio" type="submit" value="inicio" class="btn btn-outline-dark mt-3 mb-5" th:href="@{/}">Ir a inicio</a>
+				</div>
+			</div>
+			
+			<h5 class="text-info" role="alert" th:text="${titular}"></h5>
+			
+		</div>
+	</div>
+
+
+	<script src=" https://cdn.jsdelivr.net/npm/@popperjs/core " integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js " integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>
